@@ -97,7 +97,6 @@ class SearchBar extends React.Component {
     }
 
     handleKeyDown(e) {
-        // e.preventDefault();
 
         if (e.which === 13) {
             this.props.handleSearchChange(this.state.currentSearch);

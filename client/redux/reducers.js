@@ -19,6 +19,10 @@ const rootReducer = (state = initialState, action) => {
                 searchResults: action.searchResults
               });
 
+        case 'CHANGE_PRODUCT':
+              return Object.assign({}, state, {
+                currentProduct: action.product
+              });
 
         default:
               return state;
