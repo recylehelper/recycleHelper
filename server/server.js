@@ -8,6 +8,11 @@ app.use(express.static(path.join(__dirname,'../public')))
 
 const port = 3005
 
+app.get('/api/products', (req, res) => {
+    res.end();
+})
+
+
 app.listen(port, (err, success) => {
     if (err) {
         console.log('error connecting to server');

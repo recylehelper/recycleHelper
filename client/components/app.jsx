@@ -1,4 +1,7 @@
 import React from 'react';
+import SearchBarContainer from '../redux/containers/searchContainer.js';
+import SearchResults from './searchResults.jsx';
+import '../styles.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -7,13 +10,17 @@ class App extends React.Component {
         
     }
 
-
-
-
     render() {
-
+        console.log(this.props.searchResults);
         return (
-            <div>Hello</div>
+            <div>
+                <SearchBarContainer />
+                <div id = 'searchResults'>
+                    {this.props.searchResults.map((value, index) => {
+                        return <SearchResults key = {index} value = {value}/>
+                    })}
+                </div>
+            </div>
         )
     }
 }
