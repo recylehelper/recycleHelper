@@ -83,8 +83,6 @@ class SearchBar extends React.Component {
 
     componentDidMount() {
         document.getElementById('searchBar').addEventListener('keydown', (e) => {this.handleKeyDown(e)})
-
-
     }
 
     handleChange(e) {
