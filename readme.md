@@ -31,8 +31,6 @@ Once the project moves into development, the press release can be used as a touc
 ## Solution #
   > This app will pull from a large database, information about specific products. Namely the information of what their makeup is, and where it can be recycled if at all. For example, if you are looking at a coca-cola can, this app will tell you what it's made up of, can it be recycled in your zip code, and any additional steps needed for the recycling crew to recycle it (for a coke can, rinsing out the soda residue from the can).
 
-## How to Get Started ##
-  > Just download this app, allow it to access your location, and search away!
 
 ## Closing and Call to Action ##
   > This app is a great starting point in doing your part to support the environment, but know that only 20% of 'recycled' goods actually get recycled. Utilize the other 2 R's more! Reduce and Reuse!
