@@ -10,15 +10,15 @@ const cookieSession = require('cookie-session');
 const port = 3005
 
 app.use(express.json({urlencoded:true}));
-app.use(cors());
 auth(passport);
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname,'../public')))
 app.use(cookieSession({
     name: 'session',
     keys: ['123']
 }));
 app.use(cookieParser());
+app.use(cors());
+app.use(express.static(path.join(__dirname,'../public')))
 
 app.get('/', (req, res) => {
     if (req.session.token) {

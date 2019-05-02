@@ -8,7 +8,8 @@ import changeModalOpen from '../actions/changeModalOpen.js';
 const mapStateToProps = (state) => {
     
     return ({
-        search: state.search
+        search: state.search,
+        url: state.url
     })
 }
 

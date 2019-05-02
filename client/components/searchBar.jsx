@@ -8,8 +8,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import '../styles.css';
-import Axios from 'axios';
+
 
 const styles = theme => ({
     root: {
@@ -106,6 +107,28 @@ class SearchBar extends React.Component {
         }
     }
 
+    handleLogOut(e) {
+      e.preventDefault();
+      axios.get(`${this.props.url}/logout`)
+      .then((success) => {
+        console.log('success')
+      })
+      .catch((err) => {
+        console.log('err')
+      })
+    }
+
+    // handleLogIn(e) {
+    //   e.preventDefault();
+    //   axios.get(`${this.props.url}/auth/google`)
+    //   .then((success) => {
+    //     console.log('success')
+    //   })
+    //   .catch((err) => {
+    //     console.log('err')
+    //   })
+    // }
+
     render() {
         const { classes } = this.props;
         return (
@@ -129,7 +152,8 @@ class SearchBar extends React.Component {
                       <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalChange(true)}}>
                             Reset Zip
                       </Button>
-                      <div id = 'googleSignIn' class="g-signin2" data-onsuccess="onSignIn"></div>
+                      <Button id = 'googleSignIn' variant = 'contained'><a href = {`${this.props.url}/auth/google`}>LogIn</a></Button>
+                      <Button id = 'googleLogOut' variant = 'contained' onClick = {(e) => {this.handleLogOut(e)}}>Logout</Button>
                 </AppBar>
             </div>
         )

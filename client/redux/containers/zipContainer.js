@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
     
     return ({
         zip: state.zip,
-        open: state.modalOpen
+        open: state.modalOpen,
+        url: state.url
     })
 }
 

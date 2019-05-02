@@ -2,6 +2,7 @@ import Redux from 'redux';
 
 const initialState = {
     search: '',
+    url: 'http://localhost:3005',
     searchResults: null,
     zip: null,
     currentProduct: {description: "Coca-Cola Classic Cans", 
