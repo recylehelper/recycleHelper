@@ -12,14 +12,14 @@ const mapStateToProps = (state) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return ({
-        handleZipChange: (ownProps) => dispatch(changeZip(ownProps))
-    })
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return ({
+//
+//     })
+// }
 
 
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const AppContainer = connect(mapStateToProps, null)(App);
 
 export default AppContainer

@@ -126,7 +126,7 @@ class SearchBar extends React.Component {
                         />
                     </div>  
                       <Button id = 'searchEnter' variant = 'contained' onClick = {() => {this.handleKeyDown({which: 13})}}>Enter</Button>
-                      <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalOpen(e)}}>
+                      <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalChange(true)}}>
                             Reset Zip
                       </Button>
                 </AppBar>
