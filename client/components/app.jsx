@@ -7,7 +7,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import ProductContainer from '../redux/containers/productContainer.js';
+import Button from '@material-ui/core/Button'
+import axios from 'axios';
 import '../styles.css';
+
+const url = 'http://localhost:3005';
 
 const styles = theme => ({
     paper: {
@@ -42,7 +46,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        document.getElementById('app').addEventListener('keydown', (e) => {this.handleKeyDown(e)})
+        document.getElementById('app').addEventListener('keyup', (e) => {this.handleKeyDown(e)})
     }
 
     handleChange(e) {
@@ -54,8 +58,28 @@ class App extends React.Component {
     }
 
     handleKeyDown(e) {
+
         if (e.which === 13) {
-            this.props.handleZipChange(this.state.zipCode)
+            axios.get(`${url}/api/zipcodes?zip=${this.state.zipCode}`)
+            .then((response) => {
+                if (response.data === 'success') {
+                    this.props.handleZipChange(this.state.zipCode)
+                    this.setState({
+                        open: false
+                    });
+                } else {
+                    document.getElementById('zipText').value = '';
+                    document.getElementById('zipText').placeholder = 'Please enter a valid zip';
+                    document.getElementById('zipText').id = 'zipErr';
+
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+            //change to be esc when can! currently q key
+        } else if (e.which === 113) {
             this.setState({
                 open: false
             })
@@ -64,7 +88,6 @@ class App extends React.Component {
 
     handleModalOpen(e) {
         e.preventDefault()
-        console.log('true')
         this.setState({
             open: true
         })
@@ -94,7 +117,8 @@ class App extends React.Component {
                             <Typography variant = 'body2'>
                                 Please Enter your Zip Code:
                             </Typography>
-                            <TextField onChange = {(e) => this.handleChange(e)} onKeyPress = {(e) => {this.handleKeyDown(e)}}/>
+                            <TextField id = 'zipText' placeholder = 'enter zip here...' onChange = {(e) => this.handleChange(e)} onKeyPress = {(e) => {this.handleKeyDown(e)}}/>
+                            <Button id = 'zipEnter'  variant = 'contained' onClick = {() => this.handleKeyDown({which: 13})}>Submit</Button>
                         </div>
                     </Modal>
                 </div>

@@ -85,7 +85,6 @@ class SearchBar extends React.Component {
     handleChange(e) {
         e.preventDefault();
 
-
         this.setState({
             currentSearch: e.target.value
         })
@@ -94,14 +93,15 @@ class SearchBar extends React.Component {
     handleKeyDown(e) {
 
         if (e.which === 13) {
-            this.props.handleSearchChange(this.state.currentSearch);
-            this.props.handleProductSearch([this.state.currentSearch]);
+            let currSearch = this.state.currentSearch
+            this.props.handleSearchChange(currSearch);
+            this.props.handleProductSearch([currSearch]);
             this.props.deleteCurrentProduct();
 
             this.setState({
               currentSearch: ''
             }, () => {
-              e.target.value = ''
+              document.getElementById('searchBox').value = ''
             })
         }
     }
@@ -115,7 +115,7 @@ class SearchBar extends React.Component {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
-                        <InputBase
+                        <InputBase id = 'searchBox'
                             placeholder="Search…"
                             classes={{
                             root: classes.inputRoot,
@@ -124,8 +124,8 @@ class SearchBar extends React.Component {
                             onChange = {(e) => {this.handleChange(e)}}
                             // onKeyPress = {(e) => {this.handleKeyDown(e)}}
                         />
-                        
                     </div>  
+                      <Button id = 'searchEnter' variant = 'contained' onClick = {() => {this.handleKeyDown({which: 13})}}>Enter</Button>
                       <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalOpen(e)}}>
                             Reset Zip
                       </Button>

@@ -17,11 +17,23 @@
 
 #resetZip {
     display: flex;
-    align-items: flex-end;
-    width: 200px;
-    text-align: center;
+    align-items: flex-start;
+    width: 120px;
+    justify-content: center;
+    margin-left: 70%;
+
 }
 
 #product {
     margin-top: 75px;
+}
+
+#zipEnter {
+    height: 35px;
+    margin-bottom: 25px;
+}
+
+#zipErr::placeholder {
+    opacity: 1;
+    color: red;
 }
