@@ -6,6 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import ProductContainer from '../redux/containers/productContainer.js';
 import '../styles.css';
 
 const styles = theme => ({
@@ -61,26 +62,19 @@ class App extends React.Component {
         }
     }
 
+    handleModalOpen(e) {
+        e.preventDefault()
+        console.log('true')
+        this.setState({
+            open: true
+        })
+    }
+
     render() {
         const { classes } = this.props;
         let display;
-        if (!this.props.zip) {
-            display = <div id = 'zipcode'>
-                        <Modal
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                        open={this.state.open}
-                        >      
-                            <div style = {getModalStyle()} className = {classes.paper}>
-                                <Typography variant = 'body2'>
-                                    Please Enter your Zip Code:
-                                </Typography>
-                                <TextField onChange = {(e) => this.handleChange(e)} onKeyPress = {(e) => {this.handleKeyDown(e)}}/>
-                            </div>
-                        </Modal>
-                    </div>
-        } else if (this.props.currentProduct) {
-            display = <div id = 'product'>product</div>
+        if (this.props.currentProduct) {
+            display = <div id = 'product'><ProductContainer /></div>
         } else {
             display = <div id = 'searchResults'>
             {this.props.searchResults.map((value, index) => {
@@ -90,7 +84,21 @@ class App extends React.Component {
         }
         return (
             <div>
-                <SearchBarContainer />
+                <div id = 'zipcode'>
+                    <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.open}
+                    >      
+                        <div style = {getModalStyle()} className = {classes.paper}>
+                            <Typography variant = 'body2'>
+                                Please Enter your Zip Code:
+                            </Typography>
+                            <TextField onChange = {(e) => this.handleChange(e)} onKeyPress = {(e) => {this.handleKeyDown(e)}}/>
+                        </div>
+                    </Modal>
+                </div>
+                <SearchBarContainer handleModalOpen = {this.handleModalOpen.bind(this)} />
                 {display}
             </div>
         )

@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
 import '../styles.css';
 import Axios from 'axios';
 
@@ -19,7 +16,7 @@ const styles = theme => ({
       width: '100%',
     },
     grow: {
-      flexGrow: 1,
+      flexGrow: 0,
     },
     menuButton: {
       marginLeft: -12,
@@ -99,6 +96,13 @@ class SearchBar extends React.Component {
         if (e.which === 13) {
             this.props.handleSearchChange(this.state.currentSearch);
             this.props.handleProductSearch([this.state.currentSearch]);
+            this.props.deleteCurrentProduct();
+
+            this.setState({
+              currentSearch: ''
+            }, () => {
+              e.target.value = ''
+            })
         }
     }
 
@@ -120,7 +124,11 @@ class SearchBar extends React.Component {
                             onChange = {(e) => {this.handleChange(e)}}
                             // onKeyPress = {(e) => {this.handleKeyDown(e)}}
                         />
+                        
                     </div>  
+                      <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalOpen(e)}}>
+                            Reset Zip
+                      </Button>
                 </AppBar>
             </div>
         )
