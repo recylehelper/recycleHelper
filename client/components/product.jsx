@@ -5,10 +5,23 @@ const Product = (props) => {
     
     return (
         <div>
-            <Typography variant = 'h1'>Product Name</Typography>
-            <div id = 'image'>image</div>
-            <Typography variant = 'body1'>Product Description/recyclability in area</Typography>
-            <Typography variant = 'body2'>Product facts/things to do with it</Typography>
+            <Typography variant = 'h2'>{props.currentProduct.description}</Typography>
+            <img id = 'image' src = {props.currentProduct.image}/>
+            <Typography variant = 'body2'>{props.currentProduct.long_description}</Typography>
+            <br/>
+            <Typography variant = 'h3'>Materials</Typography>
+            <ul>
+                {props.currentProduct.materials.map((value, index) => {
+                    return <li key = {index}><Typography variant = 'body2'>{value.description}</Typography></li>
+                })}
+            </ul>
+            <br/>
+            <Typography variant = 'h3'>Material Rules</Typography>
+            <ul>
+                {props.currentProduct.materials.map((value, index) => {
+                    return <li key = {index}><Typography variant = 'body2'>{value.long_description}</Typography></li>
+                })}
+            </ul>
         </div>
     )
 }

@@ -2,12 +2,57 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const zipObj = require('./zipCodesObj.js');
-const fs = require('fs');
+const passport = require('passport');
+const cors = require('cors');
+const auth = require('./auth');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+const port = 3005
 
 app.use(express.json({urlencoded:true}));
+app.use(cors());
+auth(passport);
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname,'../public')))
+app.use(cookieSession({
+    name: 'session',
+    keys: ['123']
+}));
+app.use(cookieParser());
 
-const port = 3005
+app.get('/', (req, res) => {
+    if (req.session.token) {
+        res.cookie('token', req.session.token);
+        res.json({
+            status: 'session cookie set'
+        });
+    } else {
+        res.cookie('token', '');
+        res.json({
+            status: 'session cookie not set'
+        });
+    }
+});
+
+app.get('/auth/google', passport.authenticate('google', {
+    scope: ['https://www.googleapis.com/auth/userinfo.profile']
+}));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    (req, res) => {
+        req.session.token = req.user.token;
+        res.redirect('/');
+    }
+);
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    req.session = null;
+    res.redirect('/');
+}) ;
+
+
 
 app.get('/api/products', (req, res) => {
     res.end();
