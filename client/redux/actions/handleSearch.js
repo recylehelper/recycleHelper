@@ -12,7 +12,7 @@ const Search = (q) => {
     return ((dispatch) => { 
         axios.get('http://localhost:3005/api/products')
         .then(data => {
-            return dispatch(changeSearchResults([]))
+            return dispatch(changeSearchResults([1,2,3,4]))
         })
         .catch(err => {
             console.log('error', err)

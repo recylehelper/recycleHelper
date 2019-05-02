@@ -3,7 +3,7 @@ import Redux from 'redux';
 const initialState = {
     search: '',
     searchResults: [1,2,3,4],
-    location: '78704',
+    zip: null,
     currentProduct: null
 }
 
@@ -22,6 +22,11 @@ const rootReducer = (state = initialState, action) => {
         case 'CHANGE_PRODUCT':
               return Object.assign({}, state, {
                 currentProduct: action.product
+              });
+
+        case 'CHANGE_ZIP':
+              return Object.assign({}, state, {
+                zip: action.zip
               });
 
         default:

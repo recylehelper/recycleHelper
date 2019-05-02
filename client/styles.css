@@ -3,6 +3,8 @@
     padding-bottom: 10px;
     padding-left: 25px;
     padding-right: 25px;
+    display: flex;
+    flex-direction: row;
 }
 
 #searchResults {
@@ -11,4 +13,15 @@
 
 .results {
     margin-top: 5px;
+}
+
+#resetZip {
+    display: flex;
+    align-items: flex-end;
+    width: 200px;
+    text-align: center;
+}
+
+#product {
+    margin-top: 75px;
 }
