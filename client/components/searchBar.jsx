@@ -129,6 +129,7 @@ class SearchBar extends React.Component {
                       <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalChange(true)}}>
                             Reset Zip
                       </Button>
+                      <div id = 'googleSignIn' class="g-signin2" data-onsuccess="onSignIn"></div>
                 </AppBar>
             </div>
         )

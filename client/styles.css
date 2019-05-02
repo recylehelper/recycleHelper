@@ -43,3 +43,7 @@
     width: auto;
     margin-top: 20px;
 }
+
+#googleSignIn {
+    margin-left: 10px;
+}
