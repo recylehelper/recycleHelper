@@ -8,8 +8,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import '../styles.css';
-import Axios from 'axios';
+
 
 const styles = theme => ({
     root: {
@@ -74,7 +75,8 @@ class SearchBar extends React.Component {
         super(props);
 
         this.state = {
-            currentSearch: ''
+            currentSearch: '',
+            LoggedIn: 'Log In'
         }
     }
 
@@ -85,7 +87,6 @@ class SearchBar extends React.Component {
     handleChange(e) {
         e.preventDefault();
 
-
         this.setState({
             currentSearch: e.target.value
         })
@@ -94,16 +95,35 @@ class SearchBar extends React.Component {
     handleKeyDown(e) {
 
         if (e.which === 13) {
-            this.props.handleSearchChange(this.state.currentSearch);
-            this.props.handleProductSearch([this.state.currentSearch]);
+            let currSearch = this.state.currentSearch
+            this.props.handleSearchChange(currSearch);
+            this.props.handleProductSearch([currSearch]);
             this.props.deleteCurrentProduct();
 
             this.setState({
               currentSearch: ''
             }, () => {
-              e.target.value = ''
+              document.getElementById('searchBox').value = ''
             })
         }
+    }
+
+    handleLogOut(e) {
+      e.preventDefault();
+      axios.get(`${this.props.url}/logout`)
+      .then((success) => {
+        console.log('success')
+      })
+      .catch((err) => {
+        console.log('err')
+      })
+    }
+
+    handleLogIn(e) {
+      e.preventDefault();
+      this.setState({
+        LoggedIn: 'Logged In'
+      })
     }
 
     render() {
@@ -115,7 +135,7 @@ class SearchBar extends React.Component {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
-                        <InputBase
+                        <InputBase id = 'searchBox'
                             placeholder="Search…"
                             classes={{
                             root: classes.inputRoot,
@@ -124,11 +144,13 @@ class SearchBar extends React.Component {
                             onChange = {(e) => {this.handleChange(e)}}
                             // onKeyPress = {(e) => {this.handleKeyDown(e)}}
                         />
-                        
                     </div>  
-                      <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalOpen(e)}}>
+                      <Button id = 'searchEnter' variant = 'contained' onClick = {() => {this.handleKeyDown({which: 13})}}>Enter</Button>
+                      <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalChange(true)}}>
                             Reset Zip
                       </Button>
+                      <Button id = 'googleSignIn' variant = 'contained'><a href = {`${this.props.url}/auth/google`}>{this.state.LoggedIn}</a></Button>
+                      <Button id = 'googleLogOut' variant = 'contained' onClick = {(e) => {this.handleLogOut(e)}}>Logout</Button>
                 </AppBar>
             </div>
         )
