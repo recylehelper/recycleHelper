@@ -35,4 +35,4 @@ Once the project moves into development, the press release can be used as a touc
   > Just download this app, allow it to access your location, and search away!
 
 ## Closing and Call to Action ##
-  > This app is a great starting point in doing your part to support the environment, but know that only 20% of 'recycled' goods actually get recycled. Utilize the other 2 R's more! Reduce and Reuse!
+  > This app is a great starting point in doing your part to support the environment, but know that only 9% of 'recycled' goods actually get recycled. Utilize the other 2 R's more! Reduce and Reuse!
