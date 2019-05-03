@@ -44,6 +44,12 @@ class ZipCode extends React.Component {
 
     componentDidMount() {
         document.getElementById('app').addEventListener('keyup', (e) => {this.handleKeyDown(e)})
+        let storedZip = window.localStorage.getItem('zip');
+        
+        if (storedZip) {
+            this.props.handleModalChange(false);
+            this.props.handleZipChange(storedZip);
+        }
     }
 
     handleChange(e) {
@@ -60,6 +66,7 @@ class ZipCode extends React.Component {
             axios.get(`${url}/api/zipcodes?zip=${this.state.zipCode}`)
             .then((response) => {
                 if (response.data === 'success') {
+                    window.localStorage.setItem('zip',this.state.zipCode);
                     this.props.handleZipChange(this.state.zipCode)
                     this.props.handleModalChange(false)
                 } else {

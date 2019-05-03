@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile']
+    scope: ['https://www.googleapis.com/auth/userinfo.profile'],
+    prompt: 'select_account'
 }));
 
 app.get('/auth/google/callback',

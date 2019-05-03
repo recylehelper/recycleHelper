@@ -75,7 +75,8 @@ class SearchBar extends React.Component {
         super(props);
 
         this.state = {
-            currentSearch: ''
+            currentSearch: '',
+            LoggedIn: 'Log In'
         }
     }
 
@@ -118,16 +119,12 @@ class SearchBar extends React.Component {
       })
     }
 
-    // handleLogIn(e) {
-    //   e.preventDefault();
-    //   axios.get(`${this.props.url}/auth/google`)
-    //   .then((success) => {
-    //     console.log('success')
-    //   })
-    //   .catch((err) => {
-    //     console.log('err')
-    //   })
-    // }
+    handleLogIn(e) {
+      e.preventDefault();
+      this.setState({
+        LoggedIn: 'Logged In'
+      })
+    }
 
     render() {
         const { classes } = this.props;
@@ -152,7 +149,7 @@ class SearchBar extends React.Component {
                       <Button id = 'resetZip' variant = 'contained' onClick = {(e) => {this.props.handleModalChange(true)}}>
                             Reset Zip
                       </Button>
-                      <Button id = 'googleSignIn' variant = 'contained'><a href = {`${this.props.url}/auth/google`}>LogIn</a></Button>
+                      <Button id = 'googleSignIn' variant = 'contained'><a href = {`${this.props.url}/auth/google`}>{this.state.LoggedIn}</a></Button>
                       <Button id = 'googleLogOut' variant = 'contained' onClick = {(e) => {this.handleLogOut(e)}}>Logout</Button>
                 </AppBar>
             </div>
